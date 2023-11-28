@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container" style="margin: auto; text-align: center;">
+      <br />
+      <h2 style="text-align: center">Lista de Postres</h2>
+      <div style="text-align: right">
+        <button mat-raised-button color="primary" routerLink="nuevo">
+          Nuevo
+        </button>
+      </div>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="codigo">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let element">{{ element.hryeIdDessert }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="postre">
+          <th mat-header-cell *matHeaderCellDef>Postre</th>
+          <td mat-cell *matCellDef="let element">{{ element.hryeNameDesert }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="tiempo">
+          <th mat-header-cell *matHeaderCellDef>Fecha de Vencimiento</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.hryePreparationTimeDessert }}
+          </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="dificultad">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let element">{{ element.hryeDifficultyDessert }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="accion01">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-raised-button
+                color="primary"
+                [routerLink]="['ediciones', element.hryeIdDessert]"
+              >
+              <mat-icon>create</mat-icon>
+            </button>
+            </td></ng-container
+          >
+          <ng-container matColumnDef="accion02">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="eliminar(element.hryeIdDessert)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td></ng-container
+          >
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" style="text-align: center">
+        <h2>Registro de Ingredientes</h2>
+        <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Ingrediente</mat-label>
+                <input matInput placeholder="Ingrediente" formControlName="hryeNameIngredient" />
+                <mat-error *ngIf="obtenerControlCampo('hryeNameIngredient')?.errors?.['required']">
+                    El nombre es obligatorio.
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Cantidad</mat-label>
+                <input matInput placeholder="400" formControlName="hryeQuantityIngredient" />
+                <mat-error *ngIf="obtenerControlCampo('hryeQuantityIngredient')?.errors?.['required']">
+                    La cantidad es obligatorio.
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Postre</mat-label>
+                <mat-select formControlName="hryeDessert">
+                    <mat-option *ngFor="let p of listaPostres" [value]="p.hryeIdDessert">
+                        {{p.hryeNameDesert}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="obtenerControlCampo('hryeDessert')?.errors?.['required']">
+                    El postre es obligatorio.
+                </mat-error>
+            </mat-form-field>
+
+            <br />
+            <button mat-raised-button color="primary">Aceptar</button>
+            <button mat-raised-button color="warn" (click)="navegar()">
+                Cancelar
+            </button>
+            <p>{{ mensaje }}</p>
+        </form>
+    </div>
+</body>
+</html>

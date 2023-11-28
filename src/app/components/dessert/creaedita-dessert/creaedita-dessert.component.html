@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container" style="text-align: center">
+        <h2>Registro de Postres</h2>
+        <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+            <mat-form-field class="example-full-width" *ngIf="edicion">
+                <mat-label>hryeIdDessert</mat-label>
+                <input matInput placeholder="Id" formControlName="hryeIdDessert" />
+              </mat-form-field>
+              <br />
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Nombre del Postre</mat-label>
+                <input matInput placeholder="Postre" formControlName="hryeNameDesert" />
+                <mat-error *ngIf="obtenerControlCampo('hryeNameDesert')?.errors?.['required']">
+                    El nombre es obligatorio.
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Tiempo de preparación</mat-label>
+                <input matInput placeholder="Tiempo" formControlName="hryePreparationTimeDessert" />
+                <mat-error *ngIf="obtenerControlCampo('hryePreparationTimeDessert')?.errors?.['required']">
+                    El tiempo de preparación es obligatorio.
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Dificultad</mat-label>
+                <mat-select formControlName="hryeDifficultyDessert">
+                    <mat-option *ngFor="let p of dificultad" [value]="p.value">
+                        {{p.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="obtenerControlCampo('hryeDifficultyDessert')?.errors?.['required']">
+                    La dificultad es obligatorio.
+                </mat-error>
+            </mat-form-field>
+
+            
+            <br />
+            <button mat-raised-button color="primary">Aceptar</button>
+            <button mat-raised-button color="warn" (click)="navegar()">
+                Cancelar
+            </button>
+            <p>{{ mensaje }}</p>
+        </form>
+    </div>
+</body>
+
+</html>
